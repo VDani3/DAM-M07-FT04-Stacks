@@ -1,62 +1,24 @@
 import 'package:flutter/cupertino.dart';
-import 'vnt_button.dart';
+import 'package:provider/provider.dart';
+import 'app_data.dart';
+import 'layout_part_left.dart';
+import 'layout_part_central.dart';
+import 'widget_sidebar.dart';
 
 class LayoutDesktop extends StatefulWidget {
-  const LayoutDesktop({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<LayoutDesktop> createState() => _LayoutDesktopState();
+const LayoutDesktop({super.key});
+@override
+State<LayoutDesktop> createState() => _LayoutDesktopState();
 }
 
 class _LayoutDesktopState extends State<LayoutDesktop> {
-  int _counter = 0;
+@override
+Widget build(BuildContext context) {
+AppData appData = Provider.of<AppData>(context);
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text(widget.title),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  // Add text with the counter
-                  Text(
-                    ' $_counter',
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: VNTButton(
-                style: VNTButtonStyle.action,
-                isLarge: false,
-                isDisabled: false,
-                onPressed: _incrementCounter,
-                child: const Text('Increment'),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+return WidgetSidebars(
+isSidebarLeftVisible: appData.isSidebarLeftVisible,
+left: const LayoutPartLeft(),
+central: const LayoutPartCentral());
+}
 }

@@ -44,6 +44,7 @@ class WidgetSidebarsState extends State<WidgetSidebars> {
         Container(
           color: Color.fromRGBO(234, 228, 226, 1),
           child: widget.left,
+          width: width,
         ),
         // Contingut Principal (central)
         AnimatedPositioned(

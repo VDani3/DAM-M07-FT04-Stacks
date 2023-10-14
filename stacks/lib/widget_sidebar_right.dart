@@ -10,52 +10,47 @@ import 'package:flutter/material.dart';
   }
 */
 
-class WidgetSidebars extends StatefulWidget {
-  final bool isSidebarLeftVisible;
+class WidgetSidebarsRight extends StatefulWidget {
   final bool isSidebarRightVisible;
-  final Widget? left;
   final Widget? right;
   final Widget central;
 
-  const WidgetSidebars({
+  const WidgetSidebarsRight({
     Key? key,
-    required this.isSidebarLeftVisible,
     required this.isSidebarRightVisible,
-    this.left,
     this.right,
     required this.central,
   }) : super(key: key);
 
   @override
-  WidgetSidebarsState createState() => WidgetSidebarsState();
+  WidgetSidebarsRightState createState() => WidgetSidebarsRightState();
 }
 
-class WidgetSidebarsState extends State<WidgetSidebars> {
+class WidgetSidebarsRightState extends State<WidgetSidebarsRight> {
   @override
   Widget build(BuildContext context) {
     const width = 200.0;
     const millis = 300;
 
     bool isSidebarRightVisible = widget.isSidebarRightVisible;
-    bool isSidebarLeftVisible = widget.isSidebarLeftVisible;
 
-    if (widget.left == null) {
-      isSidebarLeftVisible = false;
-    } 
+    if (widget.right == null) {
+      isSidebarRightVisible = false;
+    }
 
     return Stack(
       children: [
-        if (widget.isSidebarLeftVisible)
-          Container(
-            color: Color.fromRGBO(228, 234, 226, 1),
-            child: widget.left,
-            width: width,
-          ),
-
+        //Rigth SideBar
+        Container(
+          color: Color.fromRGBO(234, 228, 226, 1),
+          child: widget.right,
+          width: width,
+        ),
+        // Contingut Principal (central)
         AnimatedPositioned(
           duration: const Duration(milliseconds: millis),
-          left: widget.isSidebarLeftVisible ? width : 0,
-          right: widget.isSidebarRightVisible ? width : 0,
+          left: 0,
+          right: isSidebarRightVisible ? width : 0,
           top: 0,
           bottom: 0,
           child: Container(
@@ -73,13 +68,8 @@ class WidgetSidebarsState extends State<WidgetSidebars> {
             child: widget.central,
           ),
         ),
-        if (widget.isSidebarRightVisible)
-          Container(
-            color: Color.fromRGBO(234, 228, 226, 1),
-            child: widget.right,
-            width: width,
-          ),
       ],
-);
+      
+    );
   }
 }

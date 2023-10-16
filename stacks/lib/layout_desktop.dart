@@ -1,4 +1,4 @@
-import 'package:cupertino_base/layout_part_Right.dart';
+import 'package:cupertino_base/layout_part_right.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'app_data.dart';
